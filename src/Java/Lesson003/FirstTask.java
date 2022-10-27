@@ -6,7 +6,6 @@ import java.util.List;
 public class FirstTask {
     static int[][] board;
     static List<List<String>> ans = new ArrayList<>();
-    static int moveNumber = 1;
     static int[][] knightMoves = new int[][]{
             {1, 2}, {-1, 2}, {1, -2}, {-1, -2},
             {2, 1}, {-2, 1}, {2, 1}, {-2, -1}
@@ -14,28 +13,26 @@ public class FirstTask {
 
     public static List<List<String>> solveKnight(int n) {
         board = new int[n][n];
-        backTrack(1, 1);
+        backTrack(1, 1, 1);
         return ans;
     }
 
-    private  static void backTrack (int row, int col) {
-        if (moveNumber != board.length * board.length + 1) {
-            board[row][col] = moveNumber;
-            for (int[] move: knightMoves) {
+    private  static void backTrack (int row, int col, int moveNumber) {
+        if (moveNumber == board.length * board.length + 1) {
+            addBoard();
+            return;
+        }
+        for (int[] move: knightMoves
+             ) {
+            if (canPlease(row, col)) {
+                board[row][col] = moveNumber;
                 int newRow = row + move[0];
                 int newCol = col + move[1];
-                if (canPlease(newRow, newCol)) {
-                    moveNumber++;
-                    backTrack(newRow, newCol);
-                }
-                board[newRow][newCol] = 0;
-                moveNumber--;
+                backTrack(newRow, newCol, moveNumber + 1);
+                if (moveNumber != 0) board[row][col] = 0;
             }
-        } else {
-            addBoard();
         }
     }
-
 
     private static boolean canPlease(int i, int j) {
         if (i >= 0 &&
@@ -47,7 +44,7 @@ public class FirstTask {
     }
 
     private  static void addBoard() {
-        List<String> b = new ArrayList<>();
+        List<String> b =new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < board.length; j++) {
@@ -60,6 +57,6 @@ public class FirstTask {
 
     public static void main(String[] args) {
         solveKnight(5);
-        System.out.print(ans.size());
+        System.out.println(ans);
     }
 }
