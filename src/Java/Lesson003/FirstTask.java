@@ -19,24 +19,23 @@ public class FirstTask {
     }
 
     private  static void backTrack (int row, int col) {
-        if (moveNumber == board.length * board.length) {
-            addBoard();
-            moveNumber = 1;
-            return;
-        }
-        for (int[] move: knightMoves
-             ) {
-            int newRow = row + move[0];
-            int newCol = col + move[1];
-            if (canPlease(newRow, newCol)) {
-                board[newRow][newCol] = moveNumber;
-                moveNumber++;
-                backTrack(newRow, newCol);
+        if (moveNumber != board.length * board.length + 1) {
+            board[row][col] = moveNumber;
+            for (int[] move: knightMoves) {
+                int newRow = row + move[0];
+                int newCol = col + move[1];
+                if (canPlease(newRow, newCol)) {
+                    moveNumber++;
+                    backTrack(newRow, newCol);
+                }
                 board[newRow][newCol] = 0;
                 moveNumber--;
             }
+        } else {
+            addBoard();
         }
     }
+
 
     private static boolean canPlease(int i, int j) {
         if (i >= 0 &&
@@ -48,7 +47,7 @@ public class FirstTask {
     }
 
     private  static void addBoard() {
-        List<String> b =new ArrayList<>();
+        List<String> b = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < board.length; j++) {
@@ -61,9 +60,6 @@ public class FirstTask {
 
     public static void main(String[] args) {
         solveKnight(5);
-        for (List<String> item: ans
-             ) {
-            System.out.print(item);
-        }
+        System.out.print(ans.size());
     }
 }
