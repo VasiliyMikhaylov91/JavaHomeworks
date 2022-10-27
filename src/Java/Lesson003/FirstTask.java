@@ -6,7 +6,6 @@ import java.util.List;
 public class FirstTask {
     static int[][] board;
     static List<List<String>> ans = new ArrayList<>();
-    static int moveNumber = 1;
     static int[][] knightMoves = new int[][]{
             {1, 2}, {-1, 2}, {1, -2}, {-1, -2},
             {2, 1}, {-2, 1}, {2, 1}, {-2, -1}
@@ -14,26 +13,23 @@ public class FirstTask {
 
     public static List<List<String>> solveKnight(int n) {
         board = new int[n][n];
-        backTrack(1, 1);
+        backTrack(1, 1, 1);
         return ans;
     }
 
-    private  static void backTrack (int row, int col) {
-        if (moveNumber == board.length * board.length) {
+    private  static void backTrack (int row, int col, int moveNumber) {
+        if (moveNumber == board.length * board.length + 1) {
             addBoard();
-            moveNumber = 1;
             return;
         }
         for (int[] move: knightMoves
              ) {
-            int newRow = row + move[0];
-            int newCol = col + move[1];
-            if (canPlease(newRow, newCol)) {
-                board[newRow][newCol] = moveNumber;
-                moveNumber++;
-                backTrack(newRow, newCol);
-                board[newRow][newCol] = 0;
-                moveNumber--;
+            if (canPlease(row, col)) {
+                board[row][col] = moveNumber;
+                int newRow = row + move[0];
+                int newCol = col + move[1];
+                backTrack(newRow, newCol, moveNumber + 1);
+                if (moveNumber != 0) board[row][col] = 0;
             }
         }
     }
@@ -61,9 +57,6 @@ public class FirstTask {
 
     public static void main(String[] args) {
         solveKnight(5);
-        for (List<String> item: ans
-             ) {
-            System.out.print(item);
-        }
+        System.out.println(ans);
     }
 }
