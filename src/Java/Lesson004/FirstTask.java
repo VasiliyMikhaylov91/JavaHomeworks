@@ -20,8 +20,7 @@ public class FirstTask {
                 if (item != par + dist) return false;
             }
         }
-        if (!st.isEmpty()) return false;
-        return true;
+        return st.isEmpty();
     }
 }
 

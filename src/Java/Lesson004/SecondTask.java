@@ -8,7 +8,7 @@ public class SecondTask {
         int first;
         int second;
         for (String item : tokens) {
-            if ("+".equals(item)){
+            if ("+".equals(item)) {
                 itemSt.push(itemSt.pop() + itemSt.pop());
             } else if ("-".equals(item)) {
                 second = itemSt.pop();
@@ -20,7 +20,7 @@ public class SecondTask {
                 second = itemSt.pop();
                 first = itemSt.pop();
                 itemSt.push(first / second);
-            }else {
+            } else {
                 itemSt.push(Integer.parseInt(item));
             }
         }

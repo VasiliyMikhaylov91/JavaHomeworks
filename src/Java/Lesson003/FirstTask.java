@@ -13,17 +13,16 @@ public class FirstTask {
 
     public static List<List<String>> solveKnight(int n) {
         board = new int[n][n];
-        backTrack(1, 1, 1);
+        backTrack(0, 0, 1);
         return ans;
     }
 
-    private  static void backTrack (int row, int col, int moveNumber) {
-        if (moveNumber == board.length * board.length + 1) {
+    private static void backTrack(int row, int col, int moveNumber) {
+        if (moveNumber == board.length * board.length) {
             addBoard();
             return;
         }
-        for (int[] move: knightMoves
-             ) {
+        for (int[] move : knightMoves) {
             if (canPlease(row, col)) {
                 board[row][col] = moveNumber;
                 int newRow = row + move[0];
@@ -36,15 +35,15 @@ public class FirstTask {
 
     private static boolean canPlease(int i, int j) {
         if (i >= 0 &&
-        i < board.length &&
-        j >= 0 &&
-        j < board.length &&
-        board[i][j] == 0) return true;
+                i < board.length &&
+                j >= 0 &&
+                j < board.length &&
+                board[i][j] == 0) return true;
         return false;
     }
 
-    private  static void addBoard() {
-        List<String> b =new ArrayList<>();
+    private static void addBoard() {
+        List<String> b = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < board.length; j++) {
@@ -57,6 +56,6 @@ public class FirstTask {
 
     public static void main(String[] args) {
         solveKnight(5);
-        System.out.println(ans);
+        System.out.println(ans.size());
     }
 }
