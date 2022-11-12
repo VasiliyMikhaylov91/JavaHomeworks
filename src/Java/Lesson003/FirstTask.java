@@ -34,12 +34,7 @@ public class FirstTask {
     }
 
     private static boolean canPlease(int i, int j) {
-        if (i >= 0 &&
-                i < board.length &&
-                j >= 0 &&
-                j < board.length &&
-                board[i][j] == 0) return true;
-        return false;
+        return (i >= 0 && i < board.length && j >= 0 && j < board.length && board[i][j] == 0);
     }
 
     private static void addBoard() {

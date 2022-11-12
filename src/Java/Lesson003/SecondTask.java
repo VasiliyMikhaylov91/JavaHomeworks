@@ -36,18 +36,11 @@ public class SecondTask {
         }
         String s = new String(charArr);
         String[] exprStr = s.replace("+", "=").split("=");
-        int[] exp = new int[3];
-        for (int index = 0; index < 3; index++) {
-            exp[index] = Integer.parseInt(exprStr[index]);
-        }
-        if (exp[0] + exp[1] == exp[2]) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(exprStr[0]);
-            sb.append("+");
-            sb.append(exprStr[1]);
-            sb.append("=");
-            sb.append(exprStr[2]);
-            ans.add(sb.toString());
+        int firstAdd = Integer.parseInt(exprStr[0]);
+        int secondAdd = Integer.parseInt(exprStr[1]);
+        int result = Integer.parseInt(exprStr[2]);
+        if (firstAdd + secondAdd == result) {
+            ans.add(String.format("%d + %d = %d", firstAdd, secondAdd, result));
         }
     }
 
