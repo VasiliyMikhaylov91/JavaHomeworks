@@ -18,7 +18,7 @@ public class FirstTask {
     }
 
     private static void backTrack(int row, int col, int moveNumber) {
-        if (moveNumber == board.length * board.length) {
+        if (moveNumber == board.length * board.length - 1) {
             addBoard();
             return;
         }
